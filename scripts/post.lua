@@ -1,6 +1,15 @@
--- example HTTP POST script which demonstrates setting the
--- HTTP method, body, and adding a header
+-- Improved HTTP POST script
 
-wrk.method = "POST"
-wrk.body   = "foo=bar&baz=quux"
-wrk.headers["Content-Type"] = "application/x-www-form-urlencoded"
+-- Define the HTTP method
+local httpMethod = "POST"
+
+-- Define the request body
+local requestBody = "foo=bar&baz=quux"
+
+-- Define the Content-Type header
+local contentTypeHeader = "application/x-www-form-urlencoded"
+
+-- Configure the script
+wrk.method = httpMethod
+wrk.body = requestBody
+wrk.headers["Content-Type"] = contentTypeHeader
