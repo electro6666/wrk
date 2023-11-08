@@ -1,10 +1,17 @@
--- example script that demonstrates use of thread:stop()
+-- This script demonstrates the use of thread:stop() to halt the thread execution.
 
-local counter = 1
+-- Define the stopping condition
+local stoppingCondition = 100
 
+-- Counter to keep track of responses
+local responseCounter = 0
+
+-- Function to handle the response
 function response()
-   if counter == 100 then
-      wrk.thread:stop()
-   end
-   counter = counter + 1
+    responseCounter = responseCounter + 1
+
+    -- Check if the counter has reached the stopping condition
+    if responseCounter >= stoppingCondition then
+        wrk.thread:stop()
+    end
 end
