@@ -1,14 +1,19 @@
--- example dynamic request script which demonstrates changing
--- the request path and a header for each request
--------------------------------------------------------------
--- NOTE: each wrk thread has an independent Lua scripting
--- context and thus there will be one counter per thread
+-- Improved dynamic request script with changing path and header
 
-counter = 0
+-- Initialize the counter
+local counter = 0
 
+-- Function to generate requests with changing path and header
+local function generateRequest()
+    local path = "/" .. counter
+    local headers = {
+        ["X-Counter"] = counter
+    }
+    counter = counter + 1
+    return wrk.format(nil, path, headers)
+end
+
+-- Define the request function
 request = function()
-   path = "/" .. counter
-   wrk.headers["X-Counter"] = counter
-   counter = counter + 1
-   return wrk.format(nil, path)
+    return generateRequest()
 end
