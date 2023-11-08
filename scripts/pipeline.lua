@@ -1,14 +1,20 @@
--- example script demonstrating HTTP pipelining
+-- Improved script for demonstrating HTTP pipelining
 
-init = function(args)
-   local r = {}
-   r[1] = wrk.format(nil, "/?foo")
-   r[2] = wrk.format(nil, "/?bar")
-   r[3] = wrk.format(nil, "/?baz")
-
-   req = table.concat(r)
+-- Function to generate HTTP requests
+local function generateRequests()
+    local requests = {}
+    requests[1] = wrk.format(nil, "/?foo")
+    requests[2] = wrk.format(nil, "/?bar")
+    requests[3] = wrk.format(nil, "/?baz")
+    return table.concat(requests)
 end
 
+-- Initialize the script
+init = function(args)
+    req = generateRequests()
+end
+
+-- Define the request function
 request = function()
-   return req
+    return req
 end
