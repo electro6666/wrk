@@ -1,8 +1,9 @@
--- example script that demonstrates use of setup() to pass
+-- example script that demonstrates the use of setup() to pass
 -- a random server address to each thread
 
 local addrs = nil
 
+-- Function to set up each thread with a random server address
 function setup(thread)
    if not addrs then
       addrs = wrk.lookup(wrk.host, wrk.port or "http")
@@ -16,7 +17,8 @@ function setup(thread)
    thread.addr = addrs[math.random(#addrs)]
 end
 
+-- Function to initialize the script
 function init(args)
-   local msg = "thread addr: %s"
+   local msg = "Thread addr: %s"
    print(msg:format(wrk.thread.addr))
 end
